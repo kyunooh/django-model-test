@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+
+class SelfReferenceModel(models.Model):
+    object_id = models.AutoField()
+    parent_id = models.ForeignKey('self')
+    
