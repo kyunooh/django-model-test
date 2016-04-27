@@ -24,7 +24,7 @@ addons:
     firefox: "45.0.2"
 
 before_script:
-  - mysql -u root -e 'create database jellyblog_travis;'
+  - mysql -u root -e 'create database model_test;'
   - python manage.py migrate
   - python manage.py collectstatic --noinput
 
