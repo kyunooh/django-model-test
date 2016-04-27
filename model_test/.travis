@@ -1,0 +1,40 @@
+language: python
+python:
+  - "3.4"
+  - "3.5"
+    # command to install dependencies
+
+before_install:
+    - "export DISPLAY=:99.0"
+    - "sh -e /etc/init.d/xvfb start"
+    - sleep 3 # give xvfb some time to start
+install:
+  - pip install -r requirements.txt
+  - pip install -q Django==$DJANGO_VERSION
+
+
+dist: trusty
+sudo: required
+addons:
+  apt:
+    packages:
+      - mysql-server-5.6
+      - mysql-client-core-5.6
+      - mysql-client-5.6
+    firefox: "45.0.2"
+
+before_script:
+  - mysql -u root -e 'create database jellyblog_travis;'
+  - python manage.py migrate
+  - python manage.py collectstatic --noinput
+
+script:
+  - python manage.py runserver
+
+env:
+  global:
+    - BUILD_ON_TRAVIS=true
+  matrix:
+    - DJANGO_VERSION=1.8.12 DB=mysql
+    - DJANGO_VERSION=1.9.4 DB=mysql
+    - DJANGO_VERSION=1.9.5 DB=mysql
