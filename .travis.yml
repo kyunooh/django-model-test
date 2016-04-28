@@ -25,6 +25,7 @@ addons:
 
 before_script:
   - mysql -u root -e 'create database model_test;'
+  - python manage.py makemigrations
   - python manage.py migrate
 
 script:
