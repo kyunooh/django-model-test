@@ -11,4 +11,4 @@ class TravisTestCase(LiveServerTestCase):
         
     def test_title_is_selenium_test(self):
         self.browser.get(self.live_server_url)
-        self.assertEquals("selenium test", self.browser.title)
+        self.assertIn("selenium test", self.browser.title)

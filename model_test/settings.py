@@ -75,16 +75,26 @@ WSGI_APPLICATION = 'model_test.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'model_test',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
+if os.getenv('BUILD_ON_TRAVIS', None):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'model_test',
+            'USER': 'root',
+            'PASSWORD': '',
+            'HOST': '127.0.0.1',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'model',
+            'USER': 'model_tester',
+            'PASSWORD': 'ModelmOdelm0del',
+            'HOST': '127.0.0.1',
+        }
+    }
 
 
 
