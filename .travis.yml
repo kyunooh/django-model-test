@@ -53,5 +53,5 @@ before_script:
 # 빌드에 사용할 스크립트입니다.
 ## 전 migrate와 test가 정상적으로 동작하는 지 확인 할 수 있도록 했습니다.
 script:
-  - python manage.py migrate
-  - python manage.py test
+  - python manage.py migrate -v 3
+  - python manage.py test -v 3
